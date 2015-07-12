@@ -1,0 +1,28 @@
+<h3 class="flb">
+	<em>提示信息</em><span><a href="javascript:;" class="flbc"
+		onclick="hideWindow('dsu_amupper');" title="关闭">关闭</a></span>
+</h3>
+<div class="c altw">
+	<div class="alert_error">
+		<script type="text/javascript" reload="1">
+			if (typeof errorhandle_dsu_amupper == 'function') {
+				errorhandle_dsu_amupper('您已签到完毕，下个整点您可以抢签（前20名才有哦！），获得额外奖励！',
+						{});
+			}
+			hideWindow('dsu_amupper');
+			showDialog('您已签到完毕，下个整点您可以抢签（前20名才有哦！），获得额外奖励！', 'alert', null,
+					null, 0, null, null, null, null, null, null);
+		</script>
+	</div>
+</div>
+<p class="o pns">
+	<button type="button" class="pn pnc" id="closebtn"
+		onclick="hideWindow('dsu_amupper');">
+		<strong>确定</strong>
+	</button>
+	<script type="text/javascript" reload="1">
+		if ($('closebtn')) {
+			$('closebtn').focus();
+		}
+	</script>
+</p>
