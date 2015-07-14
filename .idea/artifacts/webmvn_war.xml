@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="webmvn:war">
+  <artifact type="war" name="webmvn:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="webmvn.war">
       <element id="artifact" artifact-name="webmvn:war exploded" />

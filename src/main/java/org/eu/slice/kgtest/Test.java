@@ -1,3 +1,5 @@
+package org.eu.slice.kgtest;
+
 import org.eu.slice.util.HttpRequest;
 
 import java.util.regex.Matcher;
