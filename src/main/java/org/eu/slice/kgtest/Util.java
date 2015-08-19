@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
 
 public class Util {
     /**
-     * gzip 解压的缓冲区域大�?
+     * gzip 解压的缓冲区域大小
      */
     public static final int BUFFER = 1024;
     private static Logger logger = LoggerFactory.getLogger(Util.class);
@@ -55,13 +55,10 @@ public class Util {
      * @return day
      */
     public static String getDay() {
-        // 使用默认时区和语�?��境获得一个日�?
         Calendar cale = Calendar.getInstance();
         // 将Calendar类型转换成Date类型
         Date tasktime = cale.getTime();
-        // 设置日期输出的格�?
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        // 格式化输�?
         return df.format(tasktime);
     }
 
@@ -404,7 +401,7 @@ public class Util {
     public static byte[] gzipdecompress(byte[] data) throws Exception {
         ByteArrayInputStream bais = new ByteArrayInputStream(data);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // 解压�?
+        // 解压
         gzipdecompress(bais, baos);
         data = baos.toByteArray();
         baos.flush();
@@ -430,26 +427,14 @@ public class Util {
         gis.close();
     }
 
-    /**
-     * *************************************************************************************
-     * 函数名称：getDate 函数描述：格式化系统时间 输入参数：@param date 输入参数：@return 输出参数�?返回 值：String
-     * �?注：
-     * **************************************************************************************
-     */
-    public static String getDate(String date) {
+    public static String getDate(String df) {
         String SysDate = "";
-        SimpleDateFormat sdf = new SimpleDateFormat(date);
+        SimpleDateFormat sdf = new SimpleDateFormat(df);
         Date date1 = new Date();
         SysDate = sdf.format(date1);
         return SysDate;
     }
 
-    /**
-     * 格式化时�?
-     *
-     * @param time 时间
-     * @return 返回标注格式时间
-     */
     public static String formatTime(String time) {
         // 201207181114
         String formatTime = "";
@@ -470,164 +455,15 @@ public class Util {
         return formatTime;
     }
 
-    public static String getMonth() {
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
-        tasktime.setYear(tasktime.getYear() - 1);
-        // 设置日期输出的格�?
-        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM");
-        // 格式化输�?
-        return df.format(tasktime);
-    }
-
-    /**
-     * 获取�?��时间
-     *
-     * @return
-     */
-    public static String getBeginDateNew() {
-        // 使用默认时区和语�?��境获得一个日�?
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
-        tasktime.setYear(tasktime.getYear() - 1);
-        // 设置日期输出的格�?
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        // 格式化输�?
-        return df.format(tasktime);
-    }
-
-    /**
-     * 获取三个�?
-     *
-     * @return
-     */
-    public static String getDelayMonth(int delayMonth) {
-        // 使用默认时区和语�?��境获得一个日�?
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
-        tasktime.setMonth(tasktime.getMonth() - delayMonth);
-        // 设置日期输出的格�?
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        // 格式化输�?
-        return df.format(tasktime);
-    }
-
-    /**
-     * 获取�?
-     *
-     * @return
-     */
-    public static String getDelayYear(int delayYear) {
-        // 使用默认时区和语�?��境获得一个日�?
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
-        tasktime.setYear(tasktime.getYear() - delayYear);
-        // 设置日期输出的格�?
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        // 格式化输�?
-        return df.format(tasktime);
-    }
-
-    /**
-     * 获取�?��时间
-     *
-     * @return
-     */
-    public static String getEndDateNew() {
-        // 使用默认时区和语�?��境获得一个日�?
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
-        tasktime.setYear(tasktime.getYear());
-        // 设置日期输出的格�?
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        // 格式化输�?
-        return df.format(tasktime);
-    }
-
-    /**
-     * 获取到当前的日期
-     *
-     * @param delayMonth 延迟的时�?
-     * @return 得到的时�?
-     */
-    public static String getDayOfMonth(int delayMonth) {
-        // 使用默认时区和语�?��境获得一个日�?
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
-        tasktime.setMonth(tasktime.getMonth() - delayMonth);
-        // 设置日期输出的格�?
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        // 格式化输�?
-        return df.format(tasktime);
-    }
-
-    /**
-     * 获取�?��时间
-     *
-     * @return
-     */
-    public static String getBeginDate() {
-        // 使用默认时区和语�?��境获得一个日�?
-        Calendar cale = Calendar.getInstance();
-        // 将Calendar类型转换成Date类型
-        Date tasktime = cale.getTime();
-        tasktime.setYear(tasktime.getYear() - 2);
-        // 设置日期输出的格�?
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        // 格式化输�?
-        String time = df.format(tasktime);
-
-        // String month = time.substring(5, 7);
-        //
-        // int m = Integer.valueOf(month);
-        //
-        // String realTime = "";
-        //
-        // if (m < 10) {
-        // String temp1 = time.substring(0, 5);
-        // String temp2 = time.substring(6, 8);
-        // realTime = temp1 + temp2;
-        // }
-        //
-        // String day = time.substring(8, 10);
-        // int d = Integer.valueOf(day);
-        //
-        // if (d < 10) {
-        // String temp3 = time.substring(9);
-        // realTime = realTime + temp3;
-        // }
-        //
-        // if (!"".equals(realTime)) {
-        // time = realTime;
-        // }
-        //
-        // System.out.println("time = " + time);
-
-        return time;
-    }
-
-    /**
-     * 获取结束时间
-     *
-     * @return
-     */
     /**
      * @return
      */
     public static String getEndDate() {
-        // 使用默认时区和语�?��境获得一个日�?
+        // 使用默认时区和语言
         Calendar cale = Calendar.getInstance();
         // 将Calendar类型转换成Date类型
         Date tasktime = cale.getTime();
-        // 设置日期输出的格�?
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        // 格式化输�?
         String time = df.format(tasktime);
 
         // String month = time.substring(5, 7);
@@ -655,9 +491,6 @@ public class Util {
         return time;
     }
 
-    /**
-     * 判断String是否有�? return false if null or ""
-     */
     public static boolean isStringEmpty(String a) {
         if (a == null) {
             return true;

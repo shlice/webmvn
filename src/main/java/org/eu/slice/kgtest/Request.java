@@ -28,10 +28,11 @@ public class Request {
         {"objlist":[{"id":2013110,"birthday":"2010-09-09","sex":0,"classId":101011011,"name":"黄子涵","className":"宝1班"}],"code":"000000","msg":"操作成功"}
          */
 
-        r.getRequestHtml("20141021172851000015", "2013110", time2);
+        r.getRequestHtml("/health/givemedic", "20141021172851000015", "2013110", time2);
         /*
         http://app.nugget-nj.com/nugget/health/givemedic?c=2013110&dt=20150713165513&u=20141021172851000015&sign=64b9878cef09172873e864fe280d3e38
          */
+        r.getRequestHtml("//givemedic", "20141021172851000015", "2013110", time2);
     }
 
     /**
@@ -81,7 +82,7 @@ public class Request {
         httpRequest.postBytes(url, p.getBytes());
     }
 
-    public String getRequestHtml(String iuId, String cid, String time) {
+    public String getRequestHtml(String curl, String iuId, String cid, String time) {
         // body参数在sign之前必须要排序
         String body = "c=" + cid + "&dt=" + time + "&u=" + iuId;
         String sign = Util.getMD5Str(body + Variable.requestKey);
@@ -92,7 +93,7 @@ public class Request {
 //                + ",\"sign\":\"" + sign + "\"}";
 
 
-        String url = Variable.SERVER_HTML_URL + "/health/givemedic" + "?" + p;
+        String url = Variable.SERVER_HTML_URL + curl + "?" + p;
         logger.info(url);
         return url;
     }
