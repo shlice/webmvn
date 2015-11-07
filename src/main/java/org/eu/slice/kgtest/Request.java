@@ -4,6 +4,9 @@ import org.eu.slice.util.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by shild on 2015/7/13.
  */
@@ -23,15 +26,17 @@ public class Request {
         {"obj":{"idNo":"350582197903050273","category":300,"iuId":"20141021172851000015","name":"黄晓伟","answer":"3716e00840911225f38620dc8eeca023","parentid":1725,"question":"您的出生地是？"},"code":"000000","msg":"操作成功"}
          */
 
-        r.queryChildInfo("20141021172851000015", time);
+       // r.queryChildInfo("20141021172851000015", time);
         /*
         {"objlist":[{"id":2013110,"birthday":"2010-09-09","sex":0,"classId":101011011,"name":"黄子涵","className":"宝1班"}],"code":"000000","msg":"操作成功"}
          */
 
-        r.getRequestHtml("20141021172851000015", "2013110", time2);
+        r.getRequestHtml("20141021172851000015", "2013110", time2, "/message/parentsmess");
         /*
         http://app.nugget-nj.com/nugget/health/givemedic?c=2013110&dt=20150713165513&u=20141021172851000015&sign=64b9878cef09172873e864fe280d3e38
          */
+
+        //r.pageQueryGrowthArchiveNew("2013110", "0", "10");
     }
 
     /**
@@ -81,7 +86,7 @@ public class Request {
         httpRequest.postBytes(url, p.getBytes());
     }
 
-    public String getRequestHtml(String iuId, String cid, String time) {
+    public String getRequestHtml(String iuId, String cid, String time, String curl) {
         // body参数在sign之前必须要排序
         String body = "c=" + cid + "&dt=" + time + "&u=" + iuId;
         String sign = Util.getMD5Str(body + Variable.requestKey);
@@ -92,8 +97,25 @@ public class Request {
 //                + ",\"sign\":\"" + sign + "\"}";
 
 
-        String url = Variable.SERVER_HTML_URL + "/health/givemedic" + "?" + p;
+        String url = Variable.SERVER_HTML_URL + curl + "?" + p;
         logger.info(url);
         return url;
+    }
+
+    /**
+     * 查询成长记录
+     */
+    public void pageQueryGrowthArchiveNew(String id, String pageIndex,
+                                          String pageSize) {
+        String url = Variable.SERVER_SOFT_URL
+                + "/parent/pageQueryGrowthArchiveNew";
+        Map<String, Object> bodyMap = new HashMap<String, Object>();
+        bodyMap.put("childId", id);
+        bodyMap.put("pageIndex", pageIndex);
+        bodyMap.put("pageSize", pageSize);
+        String p = Util.setRequest(bodyMap);
+
+        HttpRequest httpRequest = new HttpRequest();
+        httpRequest.postBytes(url, p.getBytes());
     }
 }
