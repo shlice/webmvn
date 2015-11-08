@@ -177,7 +177,7 @@ public class HttpRequest {
 			URL realUrl = new URL(url);
 			// 打开和URL之间的连接
 			connection = (HttpURLConnection) realUrl.openConnection();
-			connection.setConnectTimeout(3000);
+			connection.setConnectTimeout(10000);
 			connection.setReadTimeout(1000);
 			// 设置通用的请求属性
 			// conn.setRequestProperty("accept", "*/*");
