@@ -1,5 +1,6 @@
 package org.eu.slice.service;
 
+import org.eu.slice.base.common.DaoException;
 import org.eu.slice.dao.TestDAO;
 import org.eu.slice.util.web.ContextUtility;
 import org.springframework.core.io.ClassPathResource;
@@ -68,5 +69,9 @@ public class TestService {
     public void removePost(String userid) {
         Assert.hasText(userid,"userid is empty!");
         testDAO.removePost(userid);
+    }
+
+    public void testException() {
+        testDAO.testException();
     }
 }

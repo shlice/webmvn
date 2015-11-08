@@ -68,6 +68,8 @@ public class AmazonJob implements Job {
 			while ((line = in.readLine()) != null) {
 				content += line;
 			}
+
+            in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,6 +1,8 @@
 package org.eu.slice.dao;
 
-import org.springframework.core.io.ClassPathResource;
+import org.eu.slice.base.common.DaoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.LobRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,6 +25,9 @@ import java.util.List;
  */
 @Repository("testDAO")
 public class TestDAO {
+    private static final Logger logger = LoggerFactory
+            .getLogger(TestDAO.class);
+
     @Resource
     private LobHandler lobHandler;
 
@@ -44,9 +49,17 @@ public class TestDAO {
                 });
     }
 
-    public void addPost2(final String uid, final String title, final File textFile, final File file) throws FileNotFoundException {
-        final Reader reader = new FileReader(textFile);
-        final InputStream is = new FileInputStream(file);
+    /**
+     * DAO不应该写文件，仅测试用
+     * @param uid
+     * @param title
+     * @param textFile
+     * @param file
+     */
+    public void addPost2(final String uid, final String title, final File textFile, final File file){
+        try {
+            final Reader reader = new FileReader(textFile);
+            final InputStream is = new FileInputStream(file);
 
         String sql = " INSERT INTO post(userid,title,text,attach)"
                 + " VALUES(?,?,?,?)";
@@ -60,6 +73,9 @@ public class TestDAO {
                         lobCreator.setBlobAsBinaryStream(ps, 4, is, (int) file.length());
                     }
                 });
+        } catch (FileNotFoundException e) {
+            throw new DaoException("File Not Found!");
+        }
     }
 
     public List getAttachsAsBytes(final String userId) {
@@ -113,5 +129,19 @@ public class TestDAO {
     public void removePost(String userid) {
         String sql = "delete from post where userid = ?";
         jdbcTemplate.update(sql, userid);
+    }
+
+    public void testException() {
+        try {
+//            String a = null;
+//            a.length();
+            final Reader reader = new FileReader("a.txt");
+        }catch(NullPointerException e) {
+            logger.error(e.getMessage());
+            throw new DaoException("string is null", e);
+        } catch (FileNotFoundException e) {
+            logger.error(e.getMessage());
+            throw new DaoException("File not found", e);
+        }
     }
 }
