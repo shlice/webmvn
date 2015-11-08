@@ -1,6 +1,9 @@
 package org.eu.slice.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.eu.slice.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,12 @@ public class AppController {
 			.getLogger(AppController.class);
 
 	private StringMgr strmgr = StringMgr.getManager("");
+
+    @Resource
+    private AppService appService;
+
+    @Resource(name="testService")
+    private TestService testService;
 
 	@RequestMapping(value = "/loginyun", method = RequestMethod.GET)
 	public ModelAndView home(HttpServletRequest request) {
@@ -44,4 +53,27 @@ public class AppController {
 		
 		return "test";
 	}
+
+    @ResponseBody
+    @RequestMapping(value = "/test3", method = RequestMethod.GET)
+    public String test3(HttpServletRequest request) {
+        try {
+//            testService.removePost("");
+            testService.removePost("user001");
+            testService.insertLobPost("user001");
+            testService.getByteLobPostByUid("user001");
+            testService.getOSLobPostByPid("user001");
+        }catch (Exception e)
+        {
+            logger.error(e.toString());
+//            logger.error("-------------");
+//            logger.error(e.getLocalizedMessage());
+//            logger.error("-------------");
+//            logger.error(e.getLocalizedMessage(), e);
+//            logger.error("-------------");
+//            logger.error(e.toString(), e.fillInStackTrace());
+        }
+
+        return "test";
+    }
 }

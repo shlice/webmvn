@@ -52,8 +52,10 @@
 		</property>
 	</bean>
 
+    <!--
 	<bean id="appService" class="org.eu.slice.service.AppService">
 	</bean>
+	-->
 	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -103,4 +105,8 @@
 		</property>
 	</bean>-->
 	<!-- end: spring jdbctemplate的事务处理 3 -->
+
+    <bean id="defaultLobHandler"
+          class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+          lazy-init="true"/>
 </beans>
