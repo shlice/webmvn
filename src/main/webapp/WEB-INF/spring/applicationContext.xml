@@ -21,5 +21,7 @@
 	<bean id="AppService" class="org.eu.slice.service.AppService" />
 	<bean id="amazonSched" class="org.eu.slice.service.AmazonSched" />
 	<bean id="yunSignSched" class="org.eu.slice.service.YunSignSched" />-->
-	
+
+    <bean id="amazonSched" class="org.eu.slice.service.AmazonSched" />
+
 </beans>
